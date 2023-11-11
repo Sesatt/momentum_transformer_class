@@ -563,8 +563,8 @@ def run_single_window(
         {
             "performance_sw": performance_sw,
             "performance_fw": performance_fw,
-            # "val_accuracy": val_loss,
-            "val_accuracy": val_accuracy,
+            "val_loss": val_loss,
+            # "val_accuracy": val_accuracy,
         },
     )
 
