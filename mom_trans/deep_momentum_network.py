@@ -287,7 +287,8 @@ class DeepMomentumNetworkModel(ABC):
         else:
             self.tuner = TunerValidationLoss(
                 model_builder,
-                objective="val_loss",
+                # objective="val_loss",
+                objective = "val_accuracy",
                 hp_minibatch_size=hp_minibatch_size,
                 max_trials=self.random_search_iterations,
                 directory=hp_directory,
@@ -348,7 +349,8 @@ class DeepMomentumNetworkModel(ABC):
         else:
             callbacks = [
                 tf.keras.callbacks.EarlyStopping(
-                    monitor="val_loss",
+                    # monitor="val_loss",
+                    monitor = "val_accuracy",
                     patience=self.early_stopping_patience,
                     min_delta=1e-4,
                 ),
@@ -429,7 +431,8 @@ class DeepMomentumNetworkModel(ABC):
         else:
             callbacks = [
                 tf.keras.callbacks.EarlyStopping(
-                    monitor="val_loss",
+                    # monitor="val_loss",
+                    monitor = "val_accuracy",
                     patience=self.early_stopping_patience,
                     min_delta=1e-4,
                     restore_best_weights=True,
@@ -482,7 +485,7 @@ class DeepMomentumNetworkModel(ABC):
             )
 
             metrics = pd.Series(metric_values, model.metrics_names)
-            return metrics["loss"]
+            return metrics["accuracy"]
 
     def get_positions(
         self,
