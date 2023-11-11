@@ -621,8 +621,8 @@ class TftDeepMomentumNetworkModel(DeepMomentumNetworkModel):
             outputs = keras.layers.TimeDistributed(
                 keras.layers.Dense(
                     # self.output_size,
-                    2,
-                    activation=tf.nn.softmax,
+                    1,
+                    activation="sigmoid",
                     kernel_constraint=keras.constraints.max_norm(3),
                 )
             )(transformer_layer[Ellipsis, :, :])
@@ -637,7 +637,7 @@ class TftDeepMomentumNetworkModel(DeepMomentumNetworkModel):
 
         # sharpe_loss = SharpeLoss(self.output_size).call
 
-        model.compile(loss=tf.keras.losses.BinaryCrossentropy(from_logits=False), optimizer=adam, sample_weight_mode="temporal", weighted_metrics = [])
+        model.compile(loss=tf.keras.losses.BinaryCrossentropy(from_logits=False), optimizer=adam, sample_weight_mode="temporal", metrics = ["accuracy"], weighted_metrics = [])
 
         self._input_placeholder = all_inputs
 
