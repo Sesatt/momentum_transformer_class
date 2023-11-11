@@ -583,7 +583,7 @@ class LstmDeepMomentumNetworkModel(DeepMomentumNetworkModel):
             loss=tf.keras.losses.BinaryCrossentropy(from_logits=False),
             optimizer=adam,
             sample_weight_mode="temporal", 
-            metrics = ["val_accuracy"], 
+            # metrics = ["val_accuracy"], 
             weighted_metrics = []
         )
         return model
