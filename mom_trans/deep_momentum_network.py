@@ -567,8 +567,8 @@ class LstmDeepMomentumNetworkModel(DeepMomentumNetworkModel):
         output = tf.keras.layers.TimeDistributed(
             tf.keras.layers.Dense(
                 # self.output_size,
-                2,
-                activation=tf.nn.softmax,
+                1,
+                activation="sigmoid",
                 kernel_constraint=keras.constraints.max_norm(3),
             )
         )(dropout[..., :, :])
@@ -583,7 +583,7 @@ class LstmDeepMomentumNetworkModel(DeepMomentumNetworkModel):
             loss=tf.keras.losses.BinaryCrossentropy(from_logits=False),
             optimizer=adam,
             sample_weight_mode="temporal", 
-            # metrics = ["val_accuracy"], 
+            metrics = ["accuracy"], 
             weighted_metrics = []
         )
         return model
