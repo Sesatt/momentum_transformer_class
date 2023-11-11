@@ -277,7 +277,6 @@ class DeepMomentumNetworkModel(ABC):
         if self.evaluate_diversified_val_sharpe:
             self.tuner = TunerDiversifiedSharpe(
                 model_builder,
-                # objective="val_loss",
                 objective=kt.Objective("sharpe", "max"),
                 hp_minibatch_size=hp_minibatch_size,
                 max_trials=self.random_search_iterations,
@@ -287,8 +286,8 @@ class DeepMomentumNetworkModel(ABC):
         else:
             self.tuner = TunerValidationLoss(
                 model_builder,
-                objective="val_loss",
-                # objective = "val_accuracy",
+                # objective="val_loss",
+                objective = "val_accuracy",
                 hp_minibatch_size=hp_minibatch_size,
                 max_trials=self.random_search_iterations,
                 directory=hp_directory,
@@ -349,7 +348,8 @@ class DeepMomentumNetworkModel(ABC):
         else:
             callbacks = [
                 tf.keras.callbacks.EarlyStopping(
-                    monitor="val_loss",
+                    monitor="val_accuracy",
+                    mode = "max",
                     patience=self.early_stopping_patience,
                     min_delta=1e-4,
                 ),
@@ -430,7 +430,8 @@ class DeepMomentumNetworkModel(ABC):
         else:
             callbacks = [
                 tf.keras.callbacks.EarlyStopping(
-                    monitor="val_loss",
+                    monitor="val_accuracy",
+                    mode = "max",
                     patience=self.early_stopping_patience,
                     min_delta=1e-4,
                     restore_best_weights=True,
