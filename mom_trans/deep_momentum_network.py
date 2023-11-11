@@ -349,8 +349,7 @@ class DeepMomentumNetworkModel(ABC):
         else:
             callbacks = [
                 tf.keras.callbacks.EarlyStopping(
-                    # monitor="val_loss",
-                    monitor = "val_accuracy",
+                    monitor="val_loss",
                     patience=self.early_stopping_patience,
                     min_delta=1e-4,
                 ),
@@ -431,8 +430,7 @@ class DeepMomentumNetworkModel(ABC):
         else:
             callbacks = [
                 tf.keras.callbacks.EarlyStopping(
-                    # monitor="val_loss",
-                    monitor = "val_accuracy",
+                    monitor="val_loss",
                     patience=self.early_stopping_patience,
                     min_delta=1e-4,
                     restore_best_weights=True,
@@ -479,7 +477,6 @@ class DeepMomentumNetworkModel(ABC):
             metric_values = model.evaluate(
                 x=inputs,
                 y=outputs,
-                sample_weight=active_entries,
                 workers=32,
                 use_multiprocessing=True,
             )
