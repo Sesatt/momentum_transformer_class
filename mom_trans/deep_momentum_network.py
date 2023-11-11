@@ -477,6 +477,7 @@ class DeepMomentumNetworkModel(ABC):
             metric_values = model.evaluate(
                 x=inputs,
                 y=outputs,
+                sample_weight=active_entries,
                 workers=32,
                 use_multiprocessing=True,
             )
