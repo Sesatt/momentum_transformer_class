@@ -519,7 +519,7 @@ class DeepMomentumNetworkModel(ABC):
         else:
             positions = positions.flatten()
 
-        positions = np.where(positions > 0.6, 1, np.where(positions < 0.4, -1, 0))
+        # positions = np.where(positions > 0.6, 1, np.where(positions < 0.4, -1, 0))
         captured_returns = returns * positions
         results = pd.DataFrame(
             {
