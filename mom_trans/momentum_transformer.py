@@ -622,7 +622,7 @@ class TftDeepMomentumNetworkModel(DeepMomentumNetworkModel):
                 keras.layers.Dense(
                     # self.output_size,
                     2,
-                    activation=tf.nn.tanh,
+                    activation=tf.nn.softmax,
                     kernel_constraint=keras.constraints.max_norm(3),
                 )
             )(transformer_layer[Ellipsis, :, :])
